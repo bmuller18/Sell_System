@@ -41,7 +41,7 @@ class Orden{
     constructor(){
         this._idOrden = ++Orden.contadorOrdenes;
         this._productos = [];
-        this._contadorProductosAgregados = 0;
+        //this._contadorProductosAgregados = 0;
     }
 
     get idOrden(){
@@ -61,12 +61,28 @@ class Orden{
     calcularTotal(){
         let totalVenta = 0;
         for( let producto of this._productos){
-
+            totalVenta += producto.precio;
         }
+        return totalVenta;
+    }
+
+    mostrarOrden(){
+        let productosOrden = ' ';
+        for ( let producto of this._productos ){
+            productosOrden += '\n' +'-' + producto.toString() + ' ';
+        }
+        console.log(`Orden: ${this._idOrden} Total: ${this.calcularTotal}, Productos: ${productosOrden}`);
     }
 }
 let producto1 = new Producto('Pantalon', 200);
 let producto2 = new Producto('Camisa', 140);
+let producto3 = new Producto('Remera', 100);
+let producto4 = new Producto('Boxer', 50);
 
-console.log(producto1.toString());
-console.log(producto2.toString());
+let orden1 = new Orden();
+orden1.agregarProductos(producto1);
+orden1.agregarProductos(producto2);
+orden1.agregarProductos(producto3);
+orden1.agregarProductos(producto4);
+
+orden1.mostrarOrden();
